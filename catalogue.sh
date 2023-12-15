@@ -41,7 +41,7 @@ yum list installed nodejs &>> $LOGFILE
     else
         echo -e "$Y NODEJS Already installed $N"
     fi
-useradd roboshop
+useradd roboshop &>> $LOGFILE
 VALIDATE $? "Creating user roboshop"
 
 mkdir -p /app
