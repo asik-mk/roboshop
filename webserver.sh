@@ -55,3 +55,7 @@ VALIDATE $? "unzipping the files"
 
 cp /home/centos/roboshop/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 VALIDATE $? "copying the roboshop.conf to nginx directory"
+
+systemctl restart nginx &>> $LOGFILE
+
+netstat -lntp
