@@ -19,7 +19,7 @@ VALIDATE(){
 
     if [ $1 -ne 0 ]
     then
-        echo -e " $2..$N Already $Y installed $N"
+        echo -e " $2..$Y Cannot Duplicate $N"
         exit 1  
     else 
         echo -e " $2..$G success $N"
