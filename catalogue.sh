@@ -27,7 +27,10 @@ VALIDATE(){
 }
 
 dnf module disable nodejs -y &>> $LOGFILE
+VALIDATE $? "disabling old version of NODEJS"
+
 dnf module enable nodejs:18 -y &>> $LOGFILE
+VALIDATE $? "Enabling NODEJS:18"
 
 yum list installed nodejs &>> $LOGFILE
     if [ $? -ne 0 ]
