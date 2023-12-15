@@ -52,4 +52,6 @@ VALIDATE $? "Allowing remote access globally"
 systemctl restart mongod 
 VALIDATE $? "Restarting mongodb"
 
+netstat -lntp
+
 #EOS
