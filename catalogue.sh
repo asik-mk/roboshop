@@ -44,7 +44,7 @@ yum list installed nodejs &>> $LOGFILE
 useradd roboshop
 VALIDATE $? "Creating user roboshop"
 
-mkdir /app
+mkdir -p /app
 VALIDATE $? "Creating a directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
