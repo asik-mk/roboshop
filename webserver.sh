@@ -30,7 +30,7 @@ yum list installed nginx &>> $LOGFILE
     if [ $? -ne 0 ]
     then
 
-    dnf install nginx -y
+    dnf install nginx -y &>> $LOGFILE
     VALIDATE $? "Installing nginx"
 
     systemctl enable nginx &>> $LOGFILE
