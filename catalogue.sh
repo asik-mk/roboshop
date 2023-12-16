@@ -75,4 +75,5 @@ VALIDATE $? "installing Mongoclient"
 mongo --host mongodb.mohammedasik.shop </app/schema/catalogue.js &>> $LOGFILE
 VALIDATE $? "Loading data to mongodb"
 
+systemctl restart catalogue &>> $LOGFILE
 netstat -lntp
