@@ -10,18 +10,19 @@ N="\e[0m"
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo " $2...$R failed $N"
+        echo -e " $2...$R failed $N"
     else 
-        echo " $2...$G success $N "
+        echo -e " $2...$G success $N "
     fi
 }
 
+
 if [ $ID -ne 0 ]
 then
-    echo " Switch to $R root $N user "
+    echo -e " Switch to $R root $N user "
     exit 1
 else 
-    echo " Brace yourselves "
+    echo -e " $Y Brace yourselves $N "
 fi
 
 dnf module disable mysql -y &>> $LOGFILE
