@@ -26,53 +26,53 @@ VALIDATE(){
     fi
 }
 
-dnf module disable nodejs -y &>> 
+dnf module disable nodejs -y  
 VALIDATE $? "disabling old version of NODEJS"
 
-dnf module enable nodejs:18 -y &>> 
+dnf module enable nodejs:18 -y 
 VALIDATE $? "Enabling NODEJS:18"
 
-yum list installed nodejs &>> 
+yum list installed nodejs 
     if [ $? -ne 0 ]
     then
-        dnf install nodejs -y &>> 
+        dnf install nodejs -y 
         VALIDATE $? "Installing NODEJS"
 
     else
         echo -e "$Y NODEJS Already installed $N"
     fi
-useradd roboshop &>> 
+useradd roboshop 
 VALIDATE $? "Creating user roboshop"
 
 mkdir -p /app
 VALIDATE $? "Creating a directory"
 
-curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> 
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip 
 VALIDATE $? "donwloading user application data"
 
 cd /app
 
-unzip -o /tmp/user.zip &>> 
+unzip -o /tmp/user.zip 
 VALIDATE $? "Unzipping the user data"
 
-npm install &>> 
+npm install 
 VALIDATE $? "installing dependencies"
 
-cp /home/centos/roboshop/user.service /etc/systemd/system/user.service &>> 
+cp /home/centos/roboshop/user.service /etc/systemd/system/user.service 
 VALIDATE $? "creating user service"
 
-systemctl daemon-reload &>> 
+systemctl daemon-reload 
 
-systemctl enable user &>> 
+systemctl enable user 
 
-systemctl start user &>> 
+systemctl start user 
 
-cp /home/centos/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo &>> 
+cp /home/centos/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo 
 
-dnf install mongodb-org-shell -y &>> 
+dnf install mongodb-org-shell -y 
 VALIDATE $? "installing Mongoclient"
 
-mongo --host mongodb.mohammedasik.shop </app/schema/user.js &>> 
+mongo --host mongodb.mohammedasik.shop </app/schema/user.js 
 VALIDATE $? "Loading data to mongodb"
 
 netstat -lntp
