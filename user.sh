@@ -26,53 +26,53 @@ VALIDATE(){
     fi
 }
 
-dnf module disable nodejs -y &>> $LOGFILE
+dnf module disable nodejs -y &>> 
 VALIDATE $? "disabling old version of NODEJS"
 
-dnf module enable nodejs:18 -y &>> $LOGFILE
+dnf module enable nodejs:18 -y &>> 
 VALIDATE $? "Enabling NODEJS:18"
 
-yum list installed nodejs &>> $LOGFILE
+yum list installed nodejs &>> 
     if [ $? -ne 0 ]
     then
-        dnf install nodejs -y &>> $LOGFILE
+        dnf install nodejs -y &>> 
         VALIDATE $? "Installing NODEJS"
 
     else
         echo -e "$Y NODEJS Already installed $N"
     fi
-useradd roboshop &>> $LOGFILE
+useradd roboshop &>> 
 VALIDATE $? "Creating user roboshop"
 
 mkdir -p /app
 VALIDATE $? "Creating a directory"
 
-curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> 
 VALIDATE $? "donwloading user application data"
 
 cd /app
 
-unzip -o /tmp/user.zip &>> $LOGFILE
+unzip -o /tmp/user.zip &>> 
 VALIDATE $? "Unzipping the user data"
 
-npm install &>> $LOGFILE
+npm install &>> 
 VALIDATE $? "installing dependencies"
 
-cp /home/centos/roboshop/user.service /etc/systemd/system/user.service &>> $LOGFILE
+cp /home/centos/roboshop/user.service /etc/systemd/system/user.service &>> 
 VALIDATE $? "creating user service"
 
-systemctl daemon-reload &>> $LOGFILE
+systemctl daemon-reload &>> 
 
-systemctl enable user &>> $LOGFILE
+systemctl enable user &>> 
 
-systemctl start user &>> $LOGFILE
+systemctl start user &>> 
 
-cp /home/centos/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/centos/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo &>> 
 
-dnf install mongodb-org-shell -y &>> $LOGFILE
+dnf install mongodb-org-shell -y &>> 
 VALIDATE $? "installing Mongoclient"
 
-mongo --host mongodb.mohammedasik.shop </app/schema/user.js &>> $LOGFILE
+mongo --host mongodb.mohammedasik.shop </app/schema/user.js &>> 
 VALIDATE $? "Loading data to mongodb"
 
 netstat -lntp
