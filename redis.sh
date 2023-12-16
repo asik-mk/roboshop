@@ -7,7 +7,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-if [ ID -ne 0 ]
+if [ $ID -ne 0 ]
 then
     echo " Swtich to root user "
     exit 1
