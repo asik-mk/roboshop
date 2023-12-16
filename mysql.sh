@@ -29,7 +29,7 @@ VALIDATE $? "Disabling old version of mysql"
 
 cp /home/centos/roboshop/mysql.repo /etc/yum.repos.d/mysql.repo
 
-dnf install mysql-community-server -y $>> $LOGFILE
+dnf install mysql-community-server -y &>> $LOGFILE
 VALIDATE $? "Installing Mysql"
 
 systemctl enable mysqld
