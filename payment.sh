@@ -46,3 +46,9 @@ VALIDATE $? "Unzipping payment data "
 pip3.6 install -r requirements.txt &>>$LOGFILE
 
 cp /home/centos/roboshop/payment.service /etc/systemd/system/payment.service 
+
+systemctl daemon-reload
+
+systemctl enable payment 
+
+systemctl start payment
