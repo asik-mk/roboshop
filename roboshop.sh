@@ -39,11 +39,11 @@ do
     ,"Changes": [{
       "Action"              : "CREATE"
       ,"ResourceRecordSet"  : {
-        "Name"              : "'" $ENV "'.'$DN'"
+        "Name"              : "'$ENV'.'$DN'"
         ,"Type"             : "A"
         ,"TTL"              : 1
         ,"ResourceRecords"  : [{
-            "Value"         : "'" $IP_ADDRESS "'"
+            "Value"         : "'$IP_ADDRESS'"
         }]
       }
     }]
