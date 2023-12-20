@@ -2,14 +2,14 @@
 ID=$(id -u)
 TIMESTAMP=$(date +%F)
 LOGFILE="/tmp/$0.$TIMESTAMP.log"
-R="e\[31m"
-G="e\[32m"
-Y="e\[33m"
-N="e\[0m"
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
 if [ $ID -ne 0 ]
 then
-    echo " Switch to root user "
+    echo -e " Switch to root user "
     exit 1
 else
     echo -e " Sit Tight while we Create Servers for YOUR $Y Roboshop $N "
