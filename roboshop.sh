@@ -39,7 +39,7 @@ do
     ,"Changes": [{
       "Action"              : "CREATE"
       ,"ResourceRecordSet"  : {
-        "Name"              : "'$ENV'.'$DN'"
+        "Name"              : "'$i'.'$DN'"
         ,"Type"             : "A"
         ,"TTL"              : 1
         ,"ResourceRecords"  : [{
