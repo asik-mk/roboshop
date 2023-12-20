@@ -9,7 +9,7 @@ N="\e[0m"
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web")
 AMI="ami-03265a0778a880afb"
 SG="sg-0a7b5d6d0aaba9852"
-
+DN="mohammedasik.shop"
 
 if [ $ID -ne 0 ]
 then
@@ -29,7 +29,27 @@ do
         INSTANCE_TYPE="t2.micro"
     fi
 
-    aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids $SG --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text
+    IP_ADDRESS=$(aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids $SG --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+
+    aws route53 change-resource-record-sets \
+  --hosted-zone-id Z05281403KGB5KOKKHZHT \
+  --change-batch '
+  {
+    "Comment": "Testing creating a record set"
+    ,"Changes": [{
+      "Action"              : "CREATE"
+      ,"ResourceRecordSet"  : {
+        "Name"              : "'" $ENV "'.'$DN'"
+        ,"Type"             : "A"
+        ,"TTL"              : 1
+        ,"ResourceRecords"  : [{
+            "Value"         : "'" $IP_ADDRESS "'"
+        }]
+      }
+    }]
+  }
+  '
+
 done
 
 
